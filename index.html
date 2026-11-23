@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Efe Bozkurt — Portfolio</title>
+  <meta name="description" content="Portfolio of Efe Bozkurt — developer." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="nav">
+    <a href="#top" class="logo">efe<span>.</span></a>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+      <button id="theme-toggle" aria-label="Toggle theme">◐</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <p class="mono">Hi, I'm</p>
+      <h1>Efe Bozkurt</h1>
+      <p class="tagline">Developer building web &amp; mobile apps.</p>
+      <div class="cta">
+        <a href="#projects" class="btn primary">See my work</a>
+        <a href="#contact" class="btn">Get in touch</a>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <h2><span class="mono">01.</span> About</h2>
+      <p>Placeholder — a short intro about who you are, what you do and what you're into goes here.</p>
+    </section>
+
+    <section id="projects" class="section">
+      <h2><span class="mono">02.</span> Projects</h2>
+      <div class="grid" id="project-grid"></div>
+    </section>
+
+    <section id="contact" class="section">
+      <h2><span class="mono">03.</span> Contact</h2>
+      <p>Want to work together or just say hi?</p>
+      <div class="links">
+        <a href="https://github.com/Efebzkurt" target="_blank" rel="noopener">GitHub</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© <span id="year"></span> Efe Bozkurt</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
