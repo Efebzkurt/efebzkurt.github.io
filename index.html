@@ -1,60 +1,621 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Efe Bozkurt — Portfolio</title>
-  <meta name="description" content="Portfolio of Efe Bozkurt — developer." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Efe Yücel Bozkurt</title>
+<meta name="description" content="Merhaba, ben Efe. Yenilikçi projelerde değer üretmek ve başarılı yazılım ürünlerinin parçası olmak istiyorum." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Rethink+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #FFFFFF;
+    --ink: #1C2140;
+    --muted: #586079;
+    --line: #E6E8F0;
+    --sun: #FFC53D;
+    --sun-soft: #FFF4D1;
+    --sky: #3D7BFF;
+    --sky-soft: #E6EEFF;
+    --mint: #1FA874;
+    --mint-soft: #DDF5EA;
+    --border: #E3E6EE;
+    --shadow: 0 1px 2px rgba(28, 33, 64, 0.06), 0 8px 24px rgba(28, 33, 64, 0.08);
+    --shadow-lg: 0 2px 4px rgba(28, 33, 64, 0.05), 0 18px 48px rgba(28, 33, 64, 0.12);
+    --wrap: 1360px;
+    --gutter: clamp(16px, 4vw, 56px);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; overflow-x: clip; }
+  body { background: var(--bg); color: var(--ink); font-family: "Rethink Sans", system-ui, sans-serif; font-size: 1.075rem; line-height: 1.65; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  img { display: block; max-width: 100%; }
+  .wrap { max-width: var(--wrap); margin: 0 auto; padding: 0 var(--gutter); }
+  .hand { font-family: Caveat, cursive; font-weight: 600; font-size: 1.5rem; line-height: 1.15; color: var(--muted); }
+  :focus-visible { outline: 3px solid var(--sky); outline-offset: 3px; border-radius: 6px; }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font: inherit; font-weight: 600; font-size: 1rem; text-decoration: none; cursor: pointer;
+    padding: 0.8rem 1.35rem; border-radius: 999px; border: 1px solid var(--border);
+    background: var(--bg); color: var(--ink); transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+  }
+  .btn:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
+  .btn.sun { background: var(--ink); border-color: var(--ink); color: #fff; }
+  .btn.sun:hover { background: #2A3160; }
+  .btn.small { padding: 0.5rem 1rem; font-size: 0.95rem; }
+
+  /* Header */
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding-top: 22px; padding-bottom: 22px; }
+  .brand { font-weight: 700; font-size: 1.1rem; text-decoration: none; }
+  .top nav { display: flex; gap: 1.5rem; align-items: center; }
+  .top nav a:not(.btn) { text-decoration: none; color: var(--muted); font-weight: 500; }
+  .top nav a:not(.btn):hover { color: var(--ink); }
+  .lang { display: inline-flex; border: 1px solid var(--border); border-radius: 999px; overflow: hidden; padding: 2px; gap: 2px; }
+  .lang button { border-radius: 999px; }
+  .lang button { font: inherit; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.02em; padding: 0.35rem 0.7rem; border: none; background: var(--bg); color: var(--muted); cursor: pointer; }
+  .lang button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+
+  /* Hero: a warm welcome */
+  .hero { display: grid; grid-template-columns: 1.4fr 1fr; gap: clamp(32px, 6vw, 80px); align-items: center; padding-top: clamp(24px, 6vh, 64px); padding-bottom: clamp(64px, 12vh, 130px); }
+  .greet { font-size: clamp(1.25rem, 2vw, 1.5rem); font-weight: 600; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+  .wave { display: inline-block; transform-origin: 70% 80%; animation: wave 1.8s ease-in-out 0.4s 1; }
+  @keyframes wave { 0%, 100% { rotate: 0deg; } 15%, 45% { rotate: 16deg; } 30%, 60% { rotate: -8deg; } 75% { rotate: 6deg; } }
+  h1 { font-size: clamp(2.1rem, 3.9vw, 3.1rem); line-height: 1.06; letter-spacing: -0.03em; font-weight: 750; }
+  .lede { color: var(--muted); font-size: clamp(1.1rem, 1.6vw, 1.25rem); margin-top: 1.3rem; max-width: 33em; }
+  .cta { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 2rem; }
+
+  .polaroid-wrap { position: relative; justify-self: center; width: min(300px, 100%); }
+  .polaroid { background: #fff; border-radius: 16px; padding: 14px 14px 60px; rotate: 1.5deg; box-shadow: var(--shadow-lg); }
+  /* Two polaroids in the hero: the portrait in front, the travel photo tucked behind */
+  .pic { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 10px; box-shadow: 0 0 0 1px #E6E9F0; }
+  .duo-front { position: relative; z-index: 2; rotate: -4deg; scale: 0.78; translate: -30% 12%; }
+  .duo-back { position: absolute; z-index: 1; top: 0; left: 0; width: 100%; rotate: 5deg; translate: 26% -4%; transition: translate 0.4s ease, rotate 0.4s ease; }
+  .polaroid-wrap:hover .duo-back { translate: 31% -6%; rotate: 8deg; }
+  .polaroid .hand { position: absolute; left: 0; right: 0; bottom: 16px; text-align: center; color: var(--muted); }
+
+  /* Flip the photo to read the note on the back */
+  .flip { perspective: 1400px; cursor: pointer; border-radius: 16px; }
+  .flip:focus-visible { outline: 3px solid var(--sky); outline-offset: 8px; }
+  .flip-inner { position: relative; transform-style: preserve-3d; transition: transform 0.7s cubic-bezier(.2, .7, .2, 1); }
+  .flip.flipped .flip-inner { transform: rotateY(180deg); }
+  @media (hover: hover) { .flip:hover .flip-inner { transform: rotateY(180deg); } }
+  .front, .back { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+  .back {
+    position: absolute; inset: 0; transform: rotateY(180deg);
+    background: #FBFBF9; display: flex; flex-direction: column; justify-content: center;
+    padding: clamp(24px, 3vw, 36px);
+  }
+  .back .note { font-family: Caveat, cursive; font-weight: 600; font-size: clamp(1.5rem, 2.2vw, 1.85rem); line-height: 1.25; color: var(--ink); }
+  .back .sign { font-family: Caveat, cursive; font-weight: 700; font-size: 1.9rem; color: var(--ink); margin-top: 1.2rem; text-align: right; }
+
+  /* Sections */
+  section.block { padding-top: clamp(64px, 11vh, 120px); padding-bottom: clamp(64px, 11vh, 120px); }
+  h2 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; letter-spacing: -0.025em; font-weight: 750; }
+  .sub { color: var(--muted); margin-top: 0.6rem; max-width: 36em; font-size: 1.15rem; }
+
+  /* What I'm like */
+  .work { background: #F6F7FB; }
+  .traits { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(36px, 5vw, 64px) clamp(32px, 6vw, 80px); margin-top: clamp(40px, 6vh, 64px); }
+  .trait h3 { font-size: clamp(1.45rem, 2.4vw, 1.85rem); line-height: 1.25; letter-spacing: -0.015em; display: inline; background: linear-gradient(transparent 58%, var(--hl) 58%, var(--hl) 92%, transparent 92%); }
+  .trait p { margin-top: 0.8rem; opacity: 0.88; max-width: 32em; }
+
+  /* Me, outside the code */
+  .life { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(24px, 4vw, 48px) clamp(20px, 4vw, 48px); margin-top: clamp(36px, 5vh, 56px); }
+  .life > li { width: calc((100% - 2 * clamp(20px, 4vw, 48px)) / 3); max-width: 270px; }
+  .life > li:nth-child(1) { rotate: -2.5deg; }
+  .life > li:nth-child(2) { rotate: 1.5deg; translate: 0 12px; }
+  .life > li:nth-child(3) { rotate: -1.5deg; }
+  .life > li:nth-child(4) { rotate: 2deg; }
+  .life > li:nth-child(5) { rotate: -2deg; translate: 0 10px; }
+  .life .polaroid { rotate: 0deg; padding: 10px 10px 40px; }
+  .life .back .cap { font-family: Caveat, cursive; font-weight: 700; font-size: 1.45rem; line-height: 1.15; color: var(--ink); margin-bottom: 0.7rem; }
+  .life-photo { aspect-ratio: 4 / 5; border-radius: 8px; overflow: hidden; background: linear-gradient(160deg, #E8EFFF, #F3F5FA); }
+  .life-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .life .back { padding: 18px; }
+  .life .back .note { font-size: 1.35rem; line-height: 1.2; }
+
+  /* Fun facts */
+  section.block.fun-block { padding-top: 0; }
+  .fun { list-style: none; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; margin-top: clamp(24px, 4vh, 36px); }
+  .fun li { display: flex; align-items: center; gap: 16px; background: #F6F7FB; border-radius: 18px; padding: 18px 22px; }
+  .fun-emoji { flex: none; width: 52px; height: 52px; border-radius: 50%; background: #fff; display: grid; place-items: center; font-size: 1.6rem; box-shadow: var(--shadow); }
+  .fun p { font-size: 1.08rem; line-height: 1.45; }
+
+  /* Stories */
+  .story { margin-top: clamp(64px, 10vh, 110px); }
+  .story-text { max-width: 720px; }
+  .story-text > div + div { margin-top: 1.1rem; }
+  .story h3 { font-size: clamp(2.1rem, 3.6vw, 2.8rem); letter-spacing: -0.025em; line-height: 1.05; }
+  .story .what { color: var(--muted); font-size: clamp(1.15rem, 1.8vw, 1.35rem); margin-top: 0.35rem; }
+  .story p.body { font-size: 1.1rem; }
+  .story p.body + p.body { margin-top: 0.8rem; }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.2rem; }
+  .chips span { background: var(--soft); border-radius: 999px; padding: 0.3rem 0.85rem; font-size: 0.93rem; font-weight: 600; }
+  .story .link { display: inline-block; margin-top: 1.2rem; font-weight: 600; text-decoration-color: var(--c); text-decoration-thickness: 3px; text-underline-offset: 5px; }
+
+  .gallery { margin-top: clamp(24px, 4vh, 40px); background: var(--soft); border-radius: 28px; padding: clamp(16px, 3vw, 36px); display: grid; gap: clamp(12px, 2vw, 24px); }
+  .gallery button { all: unset; cursor: zoom-in; display: block; border-radius: 14px; overflow: hidden; background: #fff; box-shadow: var(--shadow); transition: transform 0.15s, box-shadow 0.15s; }
+  .gallery button:hover { box-shadow: var(--shadow-lg); }
+  .gallery button:hover { transform: translateY(-3px); }
+  .gallery button:focus-visible { outline: 3px solid var(--sky); outline-offset: 3px; }
+  .gallery img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+  .gallery.phones { grid-template-columns: repeat(3, minmax(0, 300px)); justify-content: space-evenly; align-items: center; }
+  .gallery.phones button { border-radius: 22px; aspect-ratio: 9 / 16; }
+  .gallery.phones button:nth-child(2) { translate: 0 -14px; }
+  .gallery.wide { grid-template-columns: 1fr 1fr; }
+  .gallery.wide button:first-child { grid-column: 1 / -1; aspect-ratio: 16 / 7; }
+  .gallery.wide button:not(:first-child) { aspect-ratio: 16 / 10; }
+
+  /* Experience */
+  .paths { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 80px); margin-top: clamp(36px, 5vh, 56px); align-items: start; }
+  .path-title { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 1.4rem; }
+  .timeline { list-style: none; border-left: 2px solid var(--line); }
+  .timeline > li { position: relative; padding: 0 0 2rem 1.6rem; display: grid; gap: 0.2rem; }
+  .timeline > li::before { content: ""; position: absolute; left: -7px; top: 0.5rem; width: 12px; height: 12px; border-radius: 50%; background: var(--bg); border: 2px solid #B8C0D6; }
+  .timeline > li.next::before { background: var(--sky); border-color: var(--sky); box-shadow: 0 0 0 5px rgba(61, 123, 255, 0.18); }
+  .timeline .when { color: var(--muted); font-weight: 500; }
+  .timeline h3 { font-size: 1.2rem; line-height: 1.35; }
+  .timeline p { color: var(--muted); margin-top: 0.2rem; max-width: 36em; }
+  .timeline .tags { list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.6rem; }
+  .timeline .tags li { background: #F1F3F8; border-radius: 999px; padding: 0.2rem 0.75rem; font-size: 0.88rem; font-weight: 600; }
+
+  /* Contact */
+  .contact { background: var(--sky-soft); }
+  .contact h2 { font-size: clamp(2.6rem, 6vw, 4.4rem); }
+  .contact .cta { margin-top: 1.6rem; }
+  .contact .hand { margin-top: 0.9rem; }
+
+  footer { padding-top: 28px; padding-bottom: 28px; color: var(--muted); font-size: 0.92rem; }
+
+  /* Lightbox */
+  dialog.lb { margin: auto; border: none; background: transparent; max-width: min(1100px, calc(100% - 32px)); max-height: calc(100vh - 32px); padding: 0; overflow: visible; }
+  dialog.lb::backdrop { background: rgba(28, 33, 64, 0.78); }
+  dialog.lb img { max-height: calc(100vh - 120px); width: auto; max-width: 100%; margin: 0 auto; border-radius: 14px; background: #fff; }
+  .lb-bar { display: flex; justify-content: center; gap: 0.6rem; margin-top: 14px; }
+
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero .polaroid-wrap { order: -1; width: min(240px, 58%); margin-top: 20px; }
+    .duo-front { translate: -16% 0; }
+    .duo-back, .polaroid-wrap:hover .duo-back { translate: 30% 5%; rotate: 6deg; }
+    .traits { grid-template-columns: 1fr; }
+    .life > li { width: calc(50% - 12px); }
+    .life { gap: 32px 24px; }
+    .paths { grid-template-columns: 1fr; }
+    .top nav a:not(.btn) { display: none; }
+  }
+  @media (max-width: 520px) {
+    .top .btn.small { display: none; }
+    .gallery.phones { gap: 8px; padding: 14px; }
+    .gallery.phones button { border-radius: 14px; }
+    .gallery.wide { grid-template-columns: 1fr; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
 </head>
 <body>
-  <header class="nav">
-    <a href="#top" class="logo">efe<span>.</span></a>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-      <button id="theme-toggle" aria-label="Toggle theme">◐</button>
-    </nav>
-  </header>
 
-  <main id="top">
-    <section class="hero">
-      <p class="mono">Hi, I'm</p>
-      <h1>Efe Bozkurt</h1>
-      <p class="tagline">Developer building web &amp; mobile apps.</p>
+<header class="wrap top">
+  <a class="brand" href="#">Efe Yücel Bozkurt</a>
+  <nav>
+    <a class="btn small sun" href="#" data-cv data-i18n="cv">CV'mi indir</a>
+    <div class="lang" role="group" aria-label="Language / Dil">
+      <button type="button" data-lang="tr" aria-pressed="true">TR</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section class="wrap hero">
+    <div>
+      <p class="greet"><span class="wave" aria-hidden="true">👋</span> <span id="greeting">Merhaba, hoş geldin!</span></p>
+      <h1 data-i18n="hero_title">Ben Efe. Yenilikçi projelerde değer üretmek ve başarılı yazılım ürünlerinin parçası olmak istiyorum.</h1>
+      <p class="lede" data-i18n="hero_lede">Analitik düşünmeyi ve zor problemleri çözmeyi seviyorum. Yapay zekâ araçlarını iyi kullanıyor, yeni teknolojilere hızla uyum sağlıyorum.</p>
       <div class="cta">
-        <a href="#projects" class="btn primary">See my work</a>
-        <a href="#contact" class="btn">Get in touch</a>
+        <a class="btn sun" href="#ben" data-i18n="hero_cta">Beni tanı</a>
+        <a class="btn" href="#" data-cv data-i18n="cv">CV'mi indir</a>
       </div>
-    </section>
+    </div>
 
-    <section id="about" class="section">
-      <h2><span class="mono">01.</span> About</h2>
-      <p>Placeholder — a short intro about who you are, what you do and what you're into goes here.</p>
-    </section>
-
-    <section id="projects" class="section">
-      <h2><span class="mono">02.</span> Projects</h2>
-      <div class="grid" id="project-grid"></div>
-    </section>
-
-    <section id="contact" class="section">
-      <h2><span class="mono">03.</span> Contact</h2>
-      <p>Want to work together or just say hi?</p>
-      <div class="links">
-        <a href="https://github.com/Efebzkurt" target="_blank" rel="noopener">GitHub</a>
+    <div class="polaroid-wrap">
+      <div class="polaroid duo-back">
+        <img class="pic" src="img/efe-travel.jpg" width="800" height="1000" data-i18n-alt="photo2_alt" alt="Efe Yücel Bozkurt, nehir manzaralı bir seyir terasında" />
       </div>
-    </section>
-  </main>
+      <div class="polaroid duo-front">
+        <img class="pic" src="img/efe.jpg" width="800" height="1000" data-i18n-alt="photo_alt" alt="Efe Yücel Bozkurt'un portresi" />
+        <p class="hand" data-i18n="photo_caption">selam, bu benim</p>
+      </div>
+    </div>
+  </section>
 
-  <footer>
-    <p>© <span id="year"></span> Efe Bozkurt</p>
-  </footer>
+  <section class="block work" id="ben">
+    <div class="wrap">
+      <h2 data-i18n="about_title">Nasıl biriyim?</h2>
+      <p class="sub" data-i18n="about_sub">CV'mde pek göremeyeceğin taraflarım.</p>
+      <div class="traits">
+        <div class="trait" style="--hl:#FFE7A3">
+          <h3 data-i18n="t1_title">Fikirlerim çekmecede kalmaz.</h3>
+          <p data-i18n="t1_body">Sniff de Awansi de telefonumun notlarında unutulup gidebilirdi. İkisini de ilk satır koddan gerçek kullanıcılara kadar götürdüm. Bugün bildiklerimin çoğunu o yolda öğrendim.</p>
+        </div>
+        <div class="trait" style="--hl:#BFD3FF">
+          <h3 data-i18n="t2_title">Bir ürünü yapmak işin yarısı, anlatmak öbür yarısı.</h3>
+          <p data-i18n="t2_body">Sniff ve Awansi'nin tanıtım içeriklerini kendim hazırladım; milyonlarca kez izlendiler. Finans markaları ve 50 binden fazla takipçisi olan içerik üreticileri için de içerik planlayıp ürettim.</p>
+        </div>
+        <div class="trait" style="--hl:#B7EBD3">
+          <h3 data-i18n="t3_title">En güzel fikirler kalabalık odalarda çıkar.</h3>
+          <p data-i18n="t3_body">Üç yıl boyunca üniversitemin Yazılım Mühendisliği Kulübü'nde seminerleri ve etkinlikleri planlayan yönetim ekibindeydim. Sektörden konukları öğrencilerle aynı salonda buluşturmak, en az kod yazmak kadar keyif verdi.</p>
+        </div>
+        <div class="trait" style="--hl:#FFD7E5">
+          <h3 data-i18n="t4_title">“Henüz bilmiyorum” beni hiç durdurmadı.</h3>
+          <p data-i18n="t4_body">Flutter'ı, Go'yu ve Spring Boot'u bir proje onları gerektirdiği için öğrendim. Yapay Zekâ ve Teknoloji Akademisi'ne 31.000'i aşkın başvuru arasından seçilen 1.500 kişiden biri oldum; orada girişimcilik ve proje yönetimi üzerine de eğitim aldım.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <script src="script.js"></script>
+  <section class="wrap block" id="kod-disinda">
+    <h2 data-i18n="life_title">Hayatımdan kareler</h2>
+    <p class="sub" data-i18n="life_sub">Birkaç fotoğraf, birkaç hikâye. Üzerlerine gel ya da dokun.</p>
+    <ul class="life">
+      <li>
+        <div class="flip" tabindex="0" role="button" aria-pressed="false" data-i18n-aria="l1_aria" aria-label="Yurt odası fotoğrafını çevir">
+          <div class="flip-inner">
+            <div class="polaroid front"><div class="life-photo"><img src="img/life-sniff.jpg" data-i18n-alt="l1_alt" alt="Yurt odamda Sniff üzerinde çalışırken" loading="lazy" onerror="this.remove()" /></div></div>
+            <div class="polaroid back"><p class="cap" data-i18n="l1_front">Yurt odamda sabaha karşı ilk mobil uygulamamı yazıyorum</p><p class="note" data-i18n="l1_back">Büyük fikirler bazen küçük odalarda başlar.</p></div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="flip" tabindex="0" role="button" aria-pressed="false" data-i18n-aria="l2_aria" aria-label="Etkinlik fotoğrafını çevir">
+          <div class="flip-inner">
+            <div class="polaroid front"><div class="life-photo"><img src="img/life-event.jpg" data-i18n-alt="l2_alt" alt="Yazılım Mühendisliği Kulübü ile düzenlediğimiz siber güvenlik etkinliği" loading="lazy" onerror="this.remove()" /></div></div>
+            <div class="polaroid back"><p class="cap" data-i18n="l2_front">Yazılım Mühendisliği Kulübü'nde düzenlediğimiz sayısız etkinlikten birinde</p></div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="flip" tabindex="0" role="button" aria-pressed="false" data-i18n-aria="l5_aria" aria-label="Maraton fotoğrafını çevir">
+          <div class="flip-inner">
+            <div class="polaroid front"><div class="life-photo"><img src="img/life-marathon.jpg" data-i18n-alt="l5_alt" alt="İstanbul Maratonu'nda, Boğaz'ın üzerindeki köprüde" loading="lazy" onerror="this.remove()" /></div></div>
+            <div class="polaroid back"><p class="cap" data-i18n="l5_front">İstanbul Maratonu'na katılıyorum</p></div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="flip" tabindex="0" role="button" aria-pressed="false" data-i18n-aria="l3_aria" aria-label="Fenerbahçe fotoğrafını çevir">
+          <div class="flip-inner">
+            <div class="polaroid front"><div class="life-photo"><img src="img/life-fener.jpg" data-i18n-alt="l3_alt" alt="Tribünden bir Fenerbahçe maçı" loading="lazy" onerror="this.remove()" /></div></div>
+            <div class="polaroid back"><p class="cap" data-i18n="l3_front">Neden beni Fenerbahçe taraftarı yaptın baba?</p></div>
+          </div>
+        </div>
+      </li>
+      <li>
+        <div class="flip" tabindex="0" role="button" aria-pressed="false" data-i18n-aria="l4_aria" aria-label="Rocky'nin fotoğrafını çevir">
+          <div class="flip-inner">
+            <div class="polaroid front"><div class="life-photo"><img src="img/life-dog.jpg" data-i18n-alt="l4_alt" alt="Köpeğim Rocky" loading="lazy" onerror="this.remove()" /></div></div>
+            <div class="polaroid back"><p class="cap" data-i18n="l4_front">Huzur içinde uyu 🙏</p></div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section class="wrap block fun-block" id="fun-fact">
+    <h2 data-i18n="fun_title">Bunları biliyor muydun?</h2>
+    <ul class="fun">
+      <li><span class="fun-emoji" aria-hidden="true">🏓</span><p data-i18n="fun_1">Masa tenisinde son 4 yıldır beni kimse yenemedi.</p></li>
+      <li><span class="fun-emoji" aria-hidden="true">🎸</span><p data-i18n="fun_2">Metal ve rock müzik dinliyorum, elektro gitar çalıyorum.</p></li>
+      <li><span class="fun-emoji" aria-hidden="true">📍</span><p data-i18n="fun_3">Şu ana kadar 5 farklı şehirde yaşadım.</p></li>
+    </ul>
+  </section>
+
+  <section class="wrap block" id="projeler">
+    <h2 data-i18n="projects_title">Neler yaptım?</h2>
+
+    <article class="story" id="sniff" style="--soft:var(--sun-soft); --c:var(--sun)">
+      <div class="story-text">
+        <div>
+          <h3>Sniff</h3>
+          <p class="what" data-i18n="sniff_what">Köpek sahipleri için bir harita uygulaması</p>
+        </div>
+        <div>
+          <p class="body" data-i18n="sniff_1">Köpeğinle bir yere gitmeden önce içeri alınıp alınmayacağını bilmek zordur. Sniff köpek dostu kafeleri, parkları ve mekânları haritada gösteriyor; günlük yürüyüşlerini takip edip anılarını tek bir yerde saklıyor.</p>
+          <p class="body" data-i18n="sniff_2">Küçük bir uygulama olarak başladı, BTM'nin desteklediği bir girişime dönüştü. Tanıtım videolarını da ben hazırladım.</p>
+          <div class="chips"><span data-i18n="sniff_c1">BTM destekli girişim</span><span data-i18n="sniff_c2">App Store ve Google Play'de</span></div>
+          <a class="link" href="https://play.google.com/store/apps/details?id=com.kakadulabs.sniff" target="_blank" rel="noopener" data-i18n="sniff_link">Google Play'de incele</a>
+        </div>
+      </div>
+      <div class="gallery phones">
+        <button><img src="img/sniff-1.webp" data-i18n-alt="sniff_a1" alt="Sniff: Köpek dostu mekânları keşfet, yürü, Alfa ol" loading="lazy" /></button>
+        <button><img src="img/sniff-2.webp" data-i18n-alt="sniff_a2" alt="Sniff: Şehrin pati dostu noktalarını keşfet" loading="lazy" /></button>
+        <button><img src="img/sniff-3.webp" data-i18n-alt="sniff_a3" alt="Sniff: Köpeğin için tüm imkânları gör" loading="lazy" /></button>
+      </div>
+    </article>
+
+    <article class="story" id="awansi" style="--soft:var(--sky-soft); --c:var(--sky)">
+      <div class="story-text">
+        <div>
+          <h3>Awansi</h3>
+          <p class="what" data-i18n="awansi_what">Her şeyin tek ekranda olduğu bir alım-satım terminali</p>
+        </div>
+        <div>
+          <p class="body" data-i18n="awansi_1">Alım-satım yaparken grafik, emir ekranı ve borsa arasında durmadan sekme değiştirirsin. Awansi'de işlemi doğrudan canlı fiyat grafiğinin üzerinden açıyorsun; para yatırıp çekmek de aynı yerde.</p>
+          <p class="body" data-i18n="awansi_2">Gerçek zamanlı çalışan arka uçtan kullanıcıların tıkladığı arayüze kadar baştan sona ben geliştirdim.</p>
+          <div class="chips"><span data-i18n="awansi_c1">Yayında</span><span data-i18n="awansi_c2">Full-stack, gerçek zamanlı</span></div>
+          <a class="link" href="https://www.awansi.com" target="_blank" rel="noopener" data-i18n="awansi_link">awansi.com'u ziyaret et</a>
+        </div>
+      </div>
+      <div class="gallery wide">
+        <button><img src="img/awansi-1.jpg" data-i18n-alt="awansi_a1" alt="Awansi ana sayfası" loading="lazy" /></button>
+        <button><img src="img/awansi-2.jpg" data-i18n-alt="awansi_a2" alt="Awansi terminalinde canlı fiyat grafiği ve çizim araçları" loading="lazy" /></button>
+        <button><img src="img/awansi-3.jpg" data-i18n-alt="awansi_a3" alt="Awansi'de grafik üzerinden açılmış bir long pozisyon; kâr al ve zarar durdur seviyeleriyle" loading="lazy" /></button>
+      </div>
+    </article>
+
+    <article class="story" id="paket" style="--soft:var(--mint-soft); --c:var(--mint)">
+      <div class="story-text">
+        <div>
+          <h3>cluster_marker_style</h3>
+          <p class="what" data-i18n="cms_what">Flutter geliştiricileri için küçük, açık kaynak bir hediye</p>
+        </div>
+        <div>
+          <p class="body" data-i18n="cms_1">Flutter haritalarında gruplanmış işaretçileri güzel göstermek için her seferinde aynı 40 satırlık kodu yazmak gerekiyordu. Bunu 5 satıra indiren bir paket yazdım ve herkes kullanabilsin diye açık kaynak olarak yayınladım.</p>
+          <div class="chips"><span data-i18n="cms_c1">pub.dev'de açık kaynak</span><span data-i18n="cms_c2">Yaklaşık %80 daha az kod</span></div>
+          <a class="link" href="https://pub.dev/packages/cluster_marker_style" target="_blank" rel="noopener" data-i18n="cms_link">pub.dev'de incele</a>
+        </div>
+      </div>
+      <div class="gallery wide">
+        <button><img src="img/cms-1.gif" data-i18n-alt="cms_a1" alt="3.000 noktalık bir haritada gruplanmış işaretçiler, farklı stillerle" loading="lazy" /></button>
+        <button><img src="img/cms-2.png" data-i18n-alt="cms_a2" alt="Paketin soft, flat ve outlined stilleri; açık ve koyu harita üzerinde" loading="lazy" /></button>
+        <button><img src="img/cms-3.jpg" data-i18n-alt="cms_a3" alt="cluster_marker_style paketinin pub.dev sayfası" loading="lazy" /></button>
+      </div>
+    </article>
+  </section>
+
+  <section class="wrap block" id="deneyim">
+    <h2 data-i18n="exp_title">Nerelerden geçtim?</h2>
+    <div class="paths">
+    <div class="path">
+    <h3 class="path-title" data-i18n="edu_title">Eğitim</h3>
+    <ol class="timeline">
+      <li>
+        <span class="when" data-i18n="e3_when">Lisans · 2022 – Şub 2027</span>
+        <div><h3 data-i18n="e3_title">Yazılım Mühendisliği, İstanbul Beykent Üniversitesi</h3><p data-i18n="e3_body">Tam burslu.</p></div>
+      </li>
+      <li>
+        <span class="when" data-i18n="e4_when">Lise · 2017 – 2021</span>
+        <div><h3 data-i18n="e4_title">Denizli Fen Lisesi</h3></div>
+      </li>
+      <li>
+        <span class="when" data-i18n="e5_when">Ortaokul</span>
+        <div><h3 data-i18n="e5_title">Adana</h3></div>
+      </li>
+      <li>
+        <span class="when" data-i18n="e6_when">İlkokul</span>
+        <div><h3 data-i18n="e6_title">Osmaniye</h3></div>
+      </li>
+      <li>
+        <span class="when" data-i18n="e7_when">Doğum</span>
+        <div><h3 data-i18n="e7_title">Adana'da doğdum</h3></div>
+      </li>
+    </ol>
+    </div>
+    <div class="path">
+    <h3 class="path-title" data-i18n="career_title">Kariyer</h3>
+    <ol class="timeline">
+      <li class="next">
+        <span class="when" data-i18n="e0_when">Sırada</span>
+        <div><h3 data-i18n="e0_title">Belki de senin ekibin?</h3></div>
+      </li>
+      <li>
+        <span class="when" data-i18n="e1_when">Ağu 2025 – Nis 2026</span>
+        <div><h3 data-i18n="e1_title">Yazılım Mühendisliği Stajyeri, TMMOB Gemi Mühendisleri Odası</h3><p data-i18n="e1_body">Yarı zamanlı full-stack geliştirici olarak odanın yapay zekâ destekli dijitalleşme ve web sitesi yenileme projesinde çalıştım.</p><ul class="tags"><li>React</li><li>Golang</li></ul></div>
+      </li>
+      <li>
+        <span class="when" data-i18n="e2_when">Ara 2024 – Şub 2025</span>
+        <div><h3 data-i18n="e2_title">Flutter Geliştirici Stajyeri, Neon Apps</h3><p data-i18n="e2_body">Uçtan uca mobil uygulamalar geliştirdim. Stajımı, kendi yaptığım bir haber uygulamasını sunarak tamamladım.</p><ul class="tags"><li>Flutter</li></ul></div>
+      </li>
+    </ol>
+    </div>
+    </div>
+  </section>
+
+  <section class="block contact" id="iletisim">
+    <div class="wrap">
+      <h2 data-i18n="contact_title">Hadi tanışalım.</h2>
+      <p class="sub" data-i18n="contact_sub">Bir iş fırsatı, bir iş birliği ya da İstanbul'da bir kahve. Ne olursa olsun, yazarsan sevinirim.</p>
+      <div class="cta">
+        <a class="btn sun" href="mailto:ebozkurt056@outlook.com" data-i18n="contact_email">Bana e-posta gönder</a>
+        <a class="btn" href="https://www.linkedin.com/in/efeyucelbozkurt/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://github.com/Efebzkurt" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <p class="hand" data-i18n="contact_note">Psst, en sevdiğim buton soldaki.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap" data-i18n="footer">Efe tarafından, biraz da yapay zekâ yardımıyla tasarlandı ve kodlandı.</footer>
+
+<dialog class="lb" id="lb">
+  <img id="lb-img" alt="" />
+  <div class="lb-bar">
+    <button class="btn small" id="lb-prev" data-i18n="lb_prev">Önceki</button>
+    <button class="btn small" id="lb-close" data-i18n="lb_close">Kapat</button>
+    <button class="btn small" id="lb-next" data-i18n="lb_next">Sonraki</button>
+  </div>
+</dialog>
+
+<script>
+  const T = {
+    tr: {
+      meta_desc: "Merhaba, ben Efe. Yenilikçi projelerde değer üretmek ve başarılı yazılım ürünlerinin parçası olmak istiyorum.",
+      cv: "CV'mi indir",
+      greet_morning: "Günaydın, hoş geldin!", greet_day: "İyi günler, hoş geldin!", greet_evening: "İyi akşamlar, hoş geldin!", greet_night: "Bu saatte uyanık mısın? Hoş geldin!",
+      hero_title: "Ben Efe. Yenilikçi projelerde değer üretmek ve başarılı yazılım ürünlerinin parçası olmak istiyorum.",
+      hero_lede: "Analitik düşünmeyi ve zor problemleri çözmeyi seviyorum. Yapay zekâ araçlarını iyi kullanıyor, yeni teknolojilere hızla uyum sağlıyorum.",
+      hero_cta: "Beni tanı", photo_alt: "Efe Yücel Bozkurt'un portresi", photo_caption: "selam, bu benim",
+      about_title: "Nasıl biriyim?", about_sub: "CV'mde pek göremeyeceğin taraflarım.",
+      t1_title: "Fikirlerim çekmecede kalmaz.",
+      t1_body: "Sniff de Awansi de telefonumun notlarında unutulup gidebilirdi. İkisini de ilk satır koddan gerçek kullanıcılara kadar götürdüm. Bugün bildiklerimin çoğunu o yolda öğrendim.",
+      t2_title: "Bir ürünü yapmak işin yarısı, anlatmak öbür yarısı.",
+      t2_body: "Sniff ve Awansi'nin tanıtım içeriklerini kendim hazırladım; milyonlarca kez izlendiler. Finans markaları ve 50 binden fazla takipçisi olan içerik üreticileri için de içerik planlayıp ürettim.",
+      t3_title: "En güzel fikirler kalabalık odalarda çıkar.",
+      t3_body: "Üç yıl boyunca üniversitemin Yazılım Mühendisliği Kulübü'nde seminerleri ve etkinlikleri planlayan yönetim ekibindeydim. Sektörden konukları öğrencilerle aynı salonda buluşturmak, en az kod yazmak kadar keyif verdi.",
+      t4_title: "“Henüz bilmiyorum” beni hiç durdurmadı.",
+      t4_body: "Flutter'ı, Go'yu ve Spring Boot'u bir proje onları gerektirdiği için öğrendim. Yapay Zekâ ve Teknoloji Akademisi'ne 31.000'i aşkın başvuru arasından seçilen 1.500 kişiden biri oldum; orada girişimcilik ve proje yönetimi üzerine de eğitim aldım.",
+      photo2_alt: "Efe Yücel Bozkurt, nehir manzaralı bir seyir terasında",
+      life_title: "Hayatımdan kareler", life_sub: "Birkaç fotoğraf, birkaç hikâye. Üzerlerine gel ya da dokun.",
+      l1_aria: "Yurt odası fotoğrafını çevir", l1_alt: "Yurt odamda Sniff üzerinde çalışırken", l1_front: "Yurt odamda sabaha karşı ilk mobil uygulamamı yazıyorum",
+      l1_back: "Büyük fikirler bazen küçük odalarda başlar.",
+      l2_aria: "Etkinlik fotoğrafını çevir", l2_alt: "Yazılım Mühendisliği Kulübü ile düzenlediğimiz siber güvenlik etkinliği", l2_front: "Yazılım Mühendisliği Kulübü'nde düzenlediğimiz sayısız etkinlikten birinde",
+      l3_aria: "Fenerbahçe fotoğrafını çevir", l3_alt: "Tribünden bir Fenerbahçe maçı", l3_front: "Neden beni Fenerbahçe taraftarı yaptın baba?",      fun_title: "Bunları biliyor muydun?", fun_1: "Masa tenisinde son 4 yıldır beni kimse yenemedi.", fun_2: "Metal ve rock müzik dinliyorum, elektro gitar çalıyorum.", fun_3: "Şu ana kadar 5 farklı şehirde yaşadım.",
+      l5_aria: "Maraton fotoğrafını çevir", l5_alt: "İstanbul Maratonu'nda, Boğaz'ın üzerindeki köprüde", l5_front: "İstanbul Maratonu'na katılıyorum",
+      l4_aria: "Rocky'nin fotoğrafını çevir", l4_alt: "Köpeğim Rocky", l4_front: "Huzur içinde uyu 🙏",      projects_title: "Neler yaptım?",
+      sniff_what: "Köpek sahipleri için bir harita uygulaması",
+      sniff_1: "Köpeğinle bir yere gitmeden önce içeri alınıp alınmayacağını bilmek zordur. Sniff köpek dostu kafeleri, parkları ve mekânları haritada gösteriyor; günlük yürüyüşlerini takip edip anılarını tek bir yerde saklıyor.",
+      sniff_2: "Küçük bir uygulama olarak başladı, BTM'nin desteklediği bir girişime dönüştü. Tanıtım videolarını da ben hazırladım.",
+      sniff_c1: "BTM destekli girişim", sniff_c2: "App Store ve Google Play'de", sniff_link: "Google Play'de incele",
+      sniff_a1: "Sniff: Köpek dostu mekânları keşfet, yürü, Alfa ol", sniff_a2: "Sniff: Şehrin pati dostu noktalarını keşfet", sniff_a3: "Sniff: Köpeğin için tüm imkânları gör",
+      awansi_what: "Her şeyin tek ekranda olduğu bir alım-satım terminali",
+      awansi_1: "Alım-satım yaparken grafik, emir ekranı ve borsa arasında durmadan sekme değiştirirsin. Awansi'de işlemi doğrudan canlı fiyat grafiğinin üzerinden açıyorsun; para yatırıp çekmek de aynı yerde.",
+      awansi_2: "Gerçek zamanlı çalışan arka uçtan kullanıcıların tıkladığı arayüze kadar baştan sona ben geliştirdim.",
+      awansi_c1: "Yayında", awansi_c2: "Full-stack, gerçek zamanlı", awansi_link: "awansi.com'u ziyaret et",
+      awansi_a1: "Awansi ana sayfası", awansi_a2: "Awansi terminalinde canlı fiyat grafiği ve çizim araçları", awansi_a3: "Awansi'de grafik üzerinden açılmış bir long pozisyon; kâr al ve zarar durdur seviyeleriyle",
+      cms_what: "Flutter geliştiricileri için küçük, açık kaynak bir hediye",
+      cms_1: "Flutter haritalarında gruplanmış işaretçileri güzel göstermek için her seferinde aynı 40 satırlık kodu yazmak gerekiyordu. Bunu 5 satıra indiren bir paket yazdım ve herkes kullanabilsin diye açık kaynak olarak yayınladım.",
+      cms_c1: "pub.dev'de açık kaynak", cms_c2: "Yaklaşık %80 daha az kod", cms_link: "pub.dev'de incele",
+      cms_a1: "3.000 noktalık bir haritada gruplanmış işaretçiler, farklı stillerle", cms_a2: "Paketin soft, flat ve outlined stilleri; açık ve koyu harita üzerinde", cms_a3: "cluster_marker_style paketinin pub.dev sayfası",
+      exp_title: "Nerelerden geçtim?", edu_title: "Eğitim", career_title: "Kariyer",
+      e0_when: "Sırada", e0_title: "Belki de senin ekibin?",      e1_when: "Ağu 2025 – Nis 2026", e1_title: "Yazılım Mühendisliği Stajyeri, TMMOB Gemi Mühendisleri Odası",
+      e1_body: "Yarı zamanlı full-stack geliştirici olarak odanın yapay zekâ destekli dijitalleşme ve web sitesi yenileme projesinde çalıştım.",
+      e2_when: "Ara 2024 – Şub 2025", e2_title: "Flutter Geliştirici Stajyeri, Neon Apps",
+      e2_body: "Uçtan uca mobil uygulamalar geliştirdim. Stajımı, kendi yaptığım bir haber uygulamasını sunarak tamamladım.",
+      e3_when: "Lisans · 2022 – Şub 2027", e4_when: "Lise · 2017 – 2021", e3_title: "Yazılım Mühendisliği, İstanbul Beykent Üniversitesi", e3_body: "Tam burslu.",
+      e4_title: "Denizli Fen Lisesi",
+      e5_when: "Ortaokul", e5_title: "Adana", e6_when: "İlkokul", e6_title: "Osmaniye", e7_when: "Doğum", e7_title: "Adana'da doğdum",
+      contact_title: "Hadi tanışalım.",
+      contact_sub: "Bir iş fırsatı, bir iş birliği ya da İstanbul'da bir kahve. Ne olursa olsun, yazarsan sevinirim.",
+      contact_email: "Bana e-posta gönder", contact_note: "Psst, en sevdiğim buton soldaki.",
+      footer: "Efe tarafından, biraz da yapay zekâ yardımıyla tasarlandı ve kodlandı.",
+      lb_prev: "Önceki", lb_close: "Kapat", lb_next: "Sonraki",
+    },
+    en: {
+      meta_desc: "Hi, I'm Efe. I want to create real value in innovative projects and be part of successful software products.",
+      cv: "Download my CV",
+      greet_morning: "Good morning, and welcome!", greet_day: "Good afternoon, and welcome!", greet_evening: "Good evening, and welcome!", greet_night: "Up late? Welcome!",
+      hero_title: "I'm Efe. I want to create real value in innovative projects and be part of successful software products.",
+      hero_lede: "I enjoy thinking analytically and solving hard problems. I'm good with AI tools and adapt quickly to new technology.",
+      hero_cta: "Get to know me", photo_alt: "Portrait of Efe Yücel Bozkurt", photo_caption: "hi, that's me",
+      about_title: "What I'm like", about_sub: "The side of me a CV doesn't really show.",
+      t1_title: "My ideas don't stay in a drawer.",
+      t1_body: "Sniff and Awansi could easily have died as notes on my phone. I took both of them from the first line of code all the way to real users, and most of what I know today, I learned along that road.",
+      t2_title: "Building it is half the job. Telling its story is the other half.",
+      t2_body: "I made the launch content for Sniff and Awansi myself, and it's been watched millions of times. I've also planned and produced content for finance brands and for creators with more than 50K followers.",
+      t3_title: "The best ideas come out of crowded rooms.",
+      t3_body: "For three years I was on the board of my university's Software Engineering Club, part of the team behind our seminars and events. Getting people from the industry into the same room as students turned out to be just as rewarding as writing code.",
+      t4_title: "“I don't know it yet” has never stopped me.",
+      t4_body: "I learned Flutter, Go and Spring Boot because a project needed them. I was one of 1,500 people chosen from more than 31,000 applicants for the AI and Technology Academy, where I also trained in entrepreneurship and project management.",
+      photo2_alt: "Efe Yücel Bozkurt on a lookout terrace above a river",
+      life_title: "Snapshots from my life", life_sub: "A few photos, a few stories. Hover or tap to turn them over.",
+      l1_aria: "Turn over the dorm room photo", l1_alt: "Working on Sniff in my dorm room", l1_front: "Writing my first mobile app in my dorm room, in the early hours",
+      l1_back: "Big ideas sometimes start in small rooms.",
+      l2_aria: "Turn over the event photo", l2_alt: "The cyber security event we organized with our Software Engineering Club", l2_front: "At one of the countless events we ran with the Software Engineering Club",
+      l3_aria: "Turn over the Fenerbahçe photo", l3_alt: "A Fenerbahçe match, seen from the stands", l3_front: "Dad, why did you make me a Fenerbahçe fan?",      fun_title: "Fun facts", fun_1: "Nobody has beaten me at table tennis in the last 4 years.", fun_2: "I listen to metal and rock music, and I play electric guitar.", fun_3: "I've lived in 5 different cities so far.",
+      l5_aria: "Turn over the marathon photo", l5_alt: "At the Istanbul Marathon, on the bridge over the Bosphorus", l5_front: "Running the Istanbul Marathon",
+      l4_aria: "Turn over Rocky's photo", l4_alt: "My dog Rocky", l4_front: "Rest in peace 🙏",      projects_title: "Things I've built",
+      sniff_what: "A map app for dog owners",
+      sniff_1: "Before you head out with your dog, it's hard to know whether you'll be let in. Sniff maps dog-friendly cafés, parks and places, tracks your daily walks and keeps your memories in one spot.",
+      sniff_2: "It started as a small app and grew into a startup backed by BTM. I made the launch videos, too.",
+      sniff_c1: "Startup backed by BTM", sniff_c2: "On the App Store and Google Play", sniff_link: "See it on Google Play",
+      sniff_a1: "Sniff: discover dog-friendly places, walk, be the Alpha", sniff_a2: "Sniff: find the city's dog-friendly spots", sniff_a3: "Sniff: see everything a place offers your dog",
+      awansi_what: "A trading terminal that puts everything on one screen",
+      awansi_1: "Trading usually means jumping between a chart, an order form and an exchange. On Awansi you trade right from the live price chart, and deposits and withdrawals happen in the same place.",
+      awansi_2: "I built it end to end, from the real-time backend to the interface people click.",
+      awansi_c1: "Live product", awansi_c2: "Full-stack and real-time", awansi_link: "Visit awansi.com",
+      awansi_a1: "The Awansi home page", awansi_a2: "A live price chart with drawing tools in the Awansi terminal", awansi_a3: "A long position opened from the chart in Awansi, with take-profit and stop-loss levels",
+      cms_what: "A small open-source gift to Flutter developers",
+      cms_1: "Making grouped markers look good on a Flutter map meant writing the same 40 lines of code every time. I wrote a package that does it in 5 and released it as open source so anyone can use it.",
+      cms_c1: "Open source on pub.dev", cms_c2: "About 80% less code", cms_link: "See it on pub.dev",
+      cms_a1: "Clustered markers in different styles on a map of 3,000 points", cms_a2: "The package's soft, flat and outlined styles on light and dark maps", cms_a3: "The cluster_marker_style page on pub.dev",
+      exp_title: "Where I've been", edu_title: "Education", career_title: "Career",
+      e0_when: "Next", e0_title: "Maybe your team?",      e1_when: "Aug 2025 – Apr 2026", e1_title: "Software Engineering Intern, Chamber of Marine Engineers",
+      e1_body: "Worked part-time as a full-stack developer on the chamber's AI-driven digitalization and website modernization project.",
+      e2_when: "Dec 2024 – Feb 2025", e2_title: "Flutter Developer Intern, Neon Apps",
+      e2_body: "Built mobile apps end to end, and wrapped up my internship by presenting a news app I built myself.",
+      e3_when: "Bachelor's · 2022 – Feb 2027", e4_when: "High school · 2017 – 2021", e3_title: "Software Engineering, Istanbul Beykent University", e3_body: "Full scholarship.",
+      e4_title: "Denizli Science High School",
+      e5_when: "Middle school", e5_title: "Adana", e6_when: "Primary school", e6_title: "Osmaniye", e7_when: "Born", e7_title: "Born in Adana",
+      contact_title: "Let's talk.",
+      contact_sub: "A role, a partnership, or just a coffee in Istanbul. Whatever it is, I'd love to hear from you.",
+      contact_email: "Email me", contact_note: "Psst, the one on the left is my favorite.",
+      footer: "Designed and built by Efe, with a little help from AI.",
+      lb_prev: "Previous", lb_close: "Close", lb_next: "Next",
+    },
+  };
+
+  let lang = "tr";
+  function greetingKey() {
+    const h = new Date().getHours();
+    return h >= 5 && h < 12 ? "greet_morning" : h >= 12 && h < 18 ? "greet_day" : h >= 18 && h < 23 ? "greet_evening" : "greet_night";
+  }
+  function setLang(l, remember) {
+    lang = T[l] ? l : "tr";
+    const t = T[lang];
+    document.documentElement.lang = lang;
+    document.querySelector('meta[name="description"]').content = t.meta_desc;
+    document.querySelectorAll("[data-i18n]").forEach(el => { el.textContent = t[el.dataset.i18n]; });
+    document.querySelectorAll("[data-i18n-alt]").forEach(el => { el.alt = t[el.dataset.i18nAlt]; });
+    document.querySelectorAll("[data-i18n-aria]").forEach(el => { el.setAttribute("aria-label", t[el.dataset.i18nAria]); });
+    document.getElementById("greeting").textContent = t[greetingKey()];
+    // The CV button downloads the CV in the page's language
+    document.querySelectorAll("[data-cv]").forEach(a => {
+      a.href = `cv/efe-yucel-bozkurt-cv-${lang}.pdf`;
+      a.setAttribute("download", lang === "tr" ? "Efe Yücel Bozkurt CV.pdf" : "Efe Yücel Bozkurt CV (EN).pdf");
+    });
+    document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
+    if (remember) { try { localStorage.setItem("lang", lang); } catch (_) {} }
+  }
+  document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => setLang(b.dataset.lang, true)));
+
+  // Language: ?lang= in the link, then the visitor's earlier choice, then their browser language
+  let initial = new URLSearchParams(location.search).get("lang");
+  if (!T[initial]) { try { initial = localStorage.getItem("lang"); } catch (_) { initial = null; } }
+  if (!T[initial]) initial = (navigator.language || "").toLowerCase().startsWith("tr") ? "tr" : "en";
+  setLang(initial, false);
+
+  // Flip the photos on tap / click / keyboard (hover flips them on desktop via CSS)
+  document.querySelectorAll(".flip").forEach(flip => {
+    function toggleFlip() {
+      const on = !flip.classList.contains("flipped");
+      flip.classList.toggle("flipped", on);
+      flip.setAttribute("aria-pressed", String(on));
+    }
+    flip.addEventListener("click", toggleFlip);
+    flip.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggleFlip(); } });
+  });
+
+
+  // Lightbox for project images
+  const lb = document.getElementById("lb"), lbImg = document.getElementById("lb-img");
+  let set = [], idx = 0;
+  function show(i) { idx = (i + set.length) % set.length; lbImg.src = set[idx].src; lbImg.alt = set[idx].alt; }
+  document.querySelectorAll(".gallery").forEach(g => {
+    const imgs = [...g.querySelectorAll("img")];
+    g.querySelectorAll("button").forEach((b, i) => b.addEventListener("click", () => { set = imgs; show(i); lb.showModal(); }));
+  });
+  document.getElementById("lb-prev").addEventListener("click", () => show(idx - 1));
+  document.getElementById("lb-next").addEventListener("click", () => show(idx + 1));
+  document.getElementById("lb-close").addEventListener("click", () => lb.close());
+  lb.addEventListener("click", e => { if (e.target === lb) lb.close(); });
+  lb.addEventListener("keydown", e => { if (e.key === "ArrowLeft") show(idx - 1); if (e.key === "ArrowRight") show(idx + 1); });
+
+</script>
 </body>
 </html>
