@@ -565,7 +565,7 @@
     const h = new Date().getHours();
     return h >= 5 && h < 12 ? "greet_morning" : h >= 12 && h < 18 ? "greet_day" : h >= 18 && h < 23 ? "greet_evening" : "greet_night";
   }
-  function setLang(l, remember) {
+  function setLang(l) {
     lang = T[l] ? l : "tr";
     const t = T[lang];
     document.documentElement.lang = lang;
@@ -580,15 +580,12 @@
       a.setAttribute("download", lang === "tr" ? "Efe Yücel Bozkurt CV.pdf" : "Efe Yücel Bozkurt CV (EN).pdf");
     });
     document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
-    if (remember) { try { localStorage.setItem("lang", lang); } catch (_) {} }
   }
-  document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => setLang(b.dataset.lang, true)));
+  document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => setLang(b.dataset.lang)));
 
-  // Language: ?lang= in the link, then the visitor's earlier choice, then their browser language
-  let initial = new URLSearchParams(location.search).get("lang");
-  if (!T[initial]) { try { initial = localStorage.getItem("lang"); } catch (_) { initial = null; } }
-  if (!T[initial]) initial = (navigator.language || "").toLowerCase().startsWith("tr") ? "tr" : "en";
-  setLang(initial, false);
+  // Language: Turkish by default; a link with ?lang=en opens the English version
+  const fromLink = new URLSearchParams(location.search).get("lang");
+  setLang(T[fromLink] ? fromLink : "tr");
 
   // Flip the photos on tap / click / keyboard (hover flips them on desktop via CSS)
   document.querySelectorAll(".flip").forEach(flip => {
